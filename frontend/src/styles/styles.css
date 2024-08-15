@@ -1,0 +1,99 @@
+/* General body styling */
+body {
+    background-color: #1E1E2F;
+    color: #EAEAEA;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container styling */
+  .container {
+    background-color: #1E1E2F;
+    color: #EAEAEA;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Header styling */
+  .header {
+    color: #EAEAEA;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  /* Upload section styling */
+  .upload-section {
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out 0.5s;
+  }
+  
+  .upload-section h2 {
+    color: #EAEAEA; /* Ensure header in upload section matches theme */
+  }
+  
+  /* File input styling */
+  input[type="file"] {
+    background-color: #1E1E2F;
+    border: 1px solid #007ACC; /* Cyber blue border */
+    color: #EAEAEA; /* Light text color */
+    padding: 10px;
+    margin-top: 10px;
+    display: block;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  input[type="file"]:hover {
+    border-color: #005A9C; /* Darker cyber blue */
+    background-color: #2E2E3F; /* Slightly lighter dark background */
+  }
+  
+  input[type="file"]::file-selector-button {
+    background-color: #007ACC; /* Cyber blue button */
+    color: #EAEAEA; /* Light text color */
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="file"]::file-selector-button:hover {
+    background-color: #005A9C; /* Darker cyber blue */
+  }
+  
+  /* Button styling */
+  button {
+    background-color: #007ACC; /* Cyber blue */
+    color: #EAEAEA; /* Light text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #005A9C; /* Darker cyber blue */
+    transform: scale(1.05);
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

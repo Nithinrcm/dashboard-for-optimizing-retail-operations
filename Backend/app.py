@@ -37,21 +37,27 @@ def upload():
 def analysis():
     try:
         df = pd.read_csv('data.csv')
-        freq = request.form.get('frequency')
-        date_col = request.form.get('unique_col')
-        value_col = request.form.get('forecast_col')
-        df_weekly, highly_correlated_features, pair_plot_file = perform_eda(df, freq, date_col, value_col)
+        data = request.json  # Access the JSON data from the request
+        freq = "W"
+        date_col = data.get('unique_col')
+        value_col = data.get('forecast_col')
+        
+        print(freq, date_col, value_col)
+        
+        df_weekly, highly_correlated_features, pair_plot_file = perform_eda(df, "W", date_col, value_col)
         if freq=='W':
             sarimax_model, summary = fit_sarimax_model(df_weekly, value_col='sales', order=(1, 1, 1), seasonal_order=(1, 1, 1, 52))
         elif freq=='Y':
             sarimax_model, summary = fit_sarimax_model(df_weekly, value_col='sales', order=(1, 1, 1), seasonal_order=(1, 1, 1, 1))
         elif freq=='D':
             sarimax_model, summary = fit_sarimax_model(df_weekly, value_col='sales', order=(1, 1, 1), seasonal_order=(1, 1, 1, 365))
+        print("Hi 52")
         data_file, forecast_plot_file = forecast_and_plot(df, df_weekly, sarimax_model, value_col)
+        print("Hi 54")
         return jsonify({"success" : "true", 'pair_plot_file': pair_plot_file, 'highly_correlated_features': highly_correlated_features, 'summary': summary,
-                        'forecast_plot_file': forecast_plot_file, 'data_file': data_file})
+                        'forecast_plot_file': forecast_plot_file, 'data_file': data_file}), 200
     except Exception:
-        return jsonify({"success" : "false", "message" : "File not uploaded. Please try again!"})
+        return jsonify({"success" : "false", "message" : "File not uploaded. Please try again!"}), 400
     finally:
         print("Forecast analysis endpoint was called and served")
 
