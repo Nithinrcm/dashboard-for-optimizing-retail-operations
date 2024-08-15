@@ -13,7 +13,7 @@ function Upload() {
   const [frequency, setFrequency] = useState('');
   const [uniqueCol, setUniqueCol] = useState('');
   const [forecastCol, setForecastCol] = useState('');
-  const [forecastResults, setForecastResults] = useState(null);
+  const [forecastResults, setForecastResults] = useState({});
   const navigate = useNavigate();
 
   const handleDataFileChange = (e) => {
@@ -63,7 +63,6 @@ function Upload() {
       const mappedFrequency = frequencyMapping[frequency]; // Get the mapped value
       
       const response = await axios.post('http://localhost:5000/forecast-analysis', {
-        frequency: mappedFrequency,  // Send the mapped value to the backend
         unique_col: uniqueCol,
         forecast_col: forecastCol,
       });
@@ -79,8 +78,7 @@ function Upload() {
   const handleFormSubmit = async() => {
     // Handle form submission logic here
     const data = await fetchForecastAnalysis();
-    setForecastResults(data.data);
-    navigate('/eda', { state: {"results": forecastResults}});
+    navigate('/eda', { state: {"results": data.data}});
     handleDialogClose();
   };
 
@@ -116,15 +114,6 @@ function Upload() {
               <p></p>
             ) : (
               <form>
-                <label>
-                  Frequency
-                  <select value={frequency} onChange={(e) => setFrequency(e.target.value)}>
-                    <option value="weeks">Weeks</option>
-                    <option value="days">Days</option>
-                    <option value="year">Year</option>
-                  </select>
-                </label>
-
                 <label>
                   Unique Column
                   <select value={uniqueCol} onChange={(e) => setUniqueCol(e.target.value)}>

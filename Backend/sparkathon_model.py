@@ -1,3 +1,5 @@
+import base64
+import io
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -64,9 +66,13 @@ def perform_eda(dataframe, freq, date_col, value_col, plot_file='pair_plot.png')
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     
-    # Save plot to file
-    plt.savefig(plot_file)
+    img_stream = io.BytesIO()
+    plt.savefig(img_stream, format='png')
     plt.close()
+
+    # Encode the image to Base64
+    img_stream.seek(0)
+    img_base64 = base64.b64encode(img_stream.getvalue()).decode('utf-8')
 
     # Calculate correlation matrix
     corr_matrix = dataframe[numeric_cols].corr()
@@ -77,9 +83,9 @@ def perform_eda(dataframe, freq, date_col, value_col, plot_file='pair_plot.png')
     # Identify highly correlated features (> average correlation)
     highly_correlated = [col for col in avg_corr.index if avg_corr[col] > avg_corr.mean()]
 
-    return df_resampled, highly_correlated, plot_file
+    return df_resampled, highly_correlated, img_base64
 
-def fit_sarimax_model(dataframe, value_col='sales', order=(1, 1, 1), seasonal_order=(1, 1, 1, 52)):
+def fit_sarimax_model(dataframe, value_col, order=(1, 1, 1), seasonal_order=(1, 1, 1, 52)):
     """
     Fit a SARIMAX model and return the model fitted object.
 
@@ -94,7 +100,7 @@ def fit_sarimax_model(dataframe, value_col='sales', order=(1, 1, 1), seasonal_or
     """
     model = sm.tsa.statespace.SARIMAX(dataframe[value_col], order=order, seasonal_order=seasonal_order)
     results = model.fit()
-    return results, results.summary()
+    return results, str(results.summary())
 
 def forecast_and_plot(data, dataframe, model_results, value_col, forecast_periods=20, output_file='data.csv', plot_file='forecast_plot.png'):
     """
@@ -109,35 +115,25 @@ def forecast_and_plot(data, dataframe, model_results, value_col, forecast_period
         plot_file (str): Path to the image file where the plot will be saved.
     
     Returns:
-        pd.DataFrame: DataFrame containing the forecasted results.
-        str: Path to the saved plot image file.
+        dict: Dictionary containing CSV content as JSON and the path to the saved plot image file.
     """
-    # Forecast future values
     forecast_index = [dataframe.index[-1] + DateOffset(weeks=x) for x in range(1, forecast_periods + 1)]
     future_df = pd.DataFrame(index=forecast_index, columns=dataframe.columns)
 
     future_df = pd.concat([dataframe, future_df])
     future_df['forecast'] = model_results.predict(start=len(dataframe), end=len(dataframe) + forecast_periods - 1, dynamic=True)
 
-    merged_df = pd.merge(data, future_df, on='order_date', how='left')
-    # Save DataFrame to CSV
-    merged_df.to_csv(output_file, index=False)
-    
     # Plot forecast
-    plt.figure(figsize=(12, 8))
-    sns.lineplot(data=future_df[[value_col, 'forecast']])
-    plt.title('Forecast vs Actual')
-    plt.xlabel('Date')
-    plt.ylabel(value_col)
-    plt.legend(['Actual', 'Forecast'])
-    plt.grid(True)
-
-    # Save plot to file
-    plt.savefig(plot_file)
+    future_df[[value_col, 'forecast']].plot(figsize=(12, 8))
+    img_stream = io.BytesIO()
+    plt.savefig(img_stream, format='png')
     plt.close()
+    # Encode the image to Base64
+    img_stream.seek(0)
+    img_base64 = base64.b64encode(img_stream.getvalue()).decode('utf-8')
     
-    # Return the updated DataFrame and the path to the saved plot image file
-    return output_file, plot_file
+    # Return a dictionary containing CSV content as JSON and the path to the plot image file
+    return img_base64
 
 def load_rules(json_file_path):
     with open(json_file_path, 'r') as file:
@@ -197,34 +193,3 @@ def validate_data(df, rules):
                 validation_errors.append(f"Row {idx}: {column} has an invalid value '{value}'. Expected one of {options}.")
 
     return validation_errors
-
-# # Load your data
-# df = pd.read_csv('Walmart-Retail-Dataset.csv')
-
-# # Load the rules from the JSON file
-# rules_file_path = 'config_file.json'  # Replace with the path to your JSON file
-# rules = load_rules(rules_file_path)
-
-# # Load the sample data into a DataFrame
-# data = pd.read_csv('Walmart-Retail-Dataset.csv')  # Replace with the path to your data file
-
-# # Validate the data
-# errors = validate_data(data, rules)
-
-# # Print validation errors
-# if errors:
-#     for error in errors:
-#         print(error)
-# else:
-#     print("All data passed validation.")
-
-# # Perform EDA
-# df_weekly, highly_correlated_features = perform_eda(df, date_col='order_date', value_col='sales', freq='W')
-# print(df_weekly)
-# print(highly_correlated_features)
-
-# # Fit SARIMAX model
-# sarimax_model = fit_sarimax_model(df_weekly, value_col='sales', order=(1, 1, 1), seasonal_order=(1, 1, 1, 52))
-
-# # Forecast with SARIMAX
-# forecast_and_plot(df_weekly, sarimax_model, value_col='sales', forecast_periods=20)

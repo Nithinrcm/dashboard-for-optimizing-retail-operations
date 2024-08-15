@@ -11,7 +11,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Upload />} />
           <Route path="/eda" element={<Eda />} />
-          <Route path="/forecast" element={<Forecast />} />
         </Routes>
       </div>
     </Router>
