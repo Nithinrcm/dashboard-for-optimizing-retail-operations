@@ -1,0 +1,34 @@
+{
+    "rules": [
+        {
+            "column": "date",
+            "required": true,
+            "type": "datetime"
+        },
+        {
+            "column": "store_id",
+            "required": true,
+            "type": "int"
+        },
+        {
+            "column": "promo",
+            "required": true,
+            "type": "int"
+        },
+        {
+            "column": "holiday",
+            "required": true,
+            "type": "int"
+        },
+        {
+            "column": "temperature",
+            "required": true,
+            "type": "float"
+        },
+        {
+            "column": "sales",
+            "required": true,
+            "type": "float"
+        }
+    ]
+}
