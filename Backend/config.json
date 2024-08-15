@@ -1,0 +1,107 @@
+{
+    "rules": [
+        {
+            "column": "city",
+            "type": "string"
+        },
+        {
+            "column": "customer_age",
+            "type": "int"
+        },
+        {
+            "column": "customer_name",
+            "type": "string"
+        },
+        {
+            "column": "customer_segment",
+            "type": "string",
+            "options": ["Corporate", "Small Business", "Consumer", "Home Office"]
+        },
+        {
+            "column": "discount",
+            "type": "float"
+        },
+        {
+            "column": "order_date",
+            "required": true,
+            "type": "date",
+            "format": "%d-%m-%Y"
+        },
+        {
+            "column": "order_id",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "column": "order_priority",
+            "type": "string",
+            "options": ["Not Specified", "Medium", "Low", "High", "Critical"]
+        },
+        {
+            "column": "order_quantity",
+            "type": "int"
+        },
+        {
+            "column": "product_base_margin",
+            "type": "float"
+        },
+        {
+            "column": "product_category",
+            "type": "string",
+            "options": ["Furniture", "Office Supplies", "Technology"]
+        },
+        {
+            "column": "product_container",
+            "type": "string",
+            "options": ["Jumbo Drum", "Jumbo Box", "Medium Box", "Small Box", "Small Pack", "Wrap Bag", "Large Box"]
+        },
+        {
+            "column": "product_name",
+            "type": "string"
+        },
+        {
+            "column": "product_sub_category",
+            "type": "string",
+            "options": ["Chairs & Chairmats", "Scissors", "Rubber Bands", "Labels", "Office Machines", "Tables", "Paper", "Storage & Organization", "Computer Peripherals", "Office Furnishings", "Binders and Binder Accessories", "Pens & Art Supplies", "Appliances", "Copiers and Fax", "Bookcases", "Envelopes", "Telephones and Communication"]
+        },
+        {
+            "column": "profit",
+            "type": "float"
+        },
+        {
+            "column": "region",
+            "type": "string",
+            "options": ["Central", "West", "South", "East"]
+        },
+        {
+            "column": "sales",
+            "type": "float"
+        },
+        {
+            "column": "ship_date",
+            "type": "date",
+            "format": "%d-%m-%Y"
+        },
+        {
+            "column": "ship_mode",
+            "type": "string",
+            "options": ["Delivery Truck", "Regular Air", "Express Air"]
+        },
+        {
+            "column": "shipping_cost",
+            "type": "float"
+        },
+        {
+            "column": "state",
+            "type": "string"
+        },
+        {
+            "column": "unit_price",
+            "type": "float"
+        },
+        {
+            "column": "zip_code",
+            "type": "int"
+        }
+    ]
+}
