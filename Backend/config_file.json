@@ -3,7 +3,8 @@
         {
             "column": "date",
             "required": true,
-            "type": "datetime"
+            "type": "date",
+            "format": "%d-%m-%Y"
         },
         {
             "column": "store_id",

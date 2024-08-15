@@ -125,6 +125,8 @@ function Upload() {
       const response = await axios.post('http://localhost:5000/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+      console.log(response);
+      navigate('/eda', { state: { edaData: response.data } });
     } catch (error) {
       console.error('Error uploading files:', error);
       setError(error);
