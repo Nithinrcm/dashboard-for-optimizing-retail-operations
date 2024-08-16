@@ -6,6 +6,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    color: navy;
   }
   
   .dashboard-title {
@@ -29,6 +30,6 @@
   
   .dashboard-iframe {
     width: 100%;
-    max-width: 3040px;
-    height: 600px; /* Adjust the height as needed */
+    max-width: 3300px;
+    height: 650px; /* Adjust the height as needed */
   }

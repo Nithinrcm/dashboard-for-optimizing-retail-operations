@@ -7,6 +7,26 @@ import requests
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "supports_credentials": True}})
 
+@app.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.json
+        username = data.get('username')
+        password = data.get('password')
+
+        if not password or not username:
+            return jsonify({"error": "Both username and password are required"}), 400
+        
+        if(username == "admin"):
+            if(password == "admin@123"):
+                return jsonify({"success": "true", "message": "login successful!"}), 200
+            
+    except Exception as e:
+        print("Exception occurred:", str(e))
+        return jsonify({"success": "false", "message": "login unsuccessful"}), 400
+    finally:
+        print("Login endpoint was called and served")
+
 @app.route('/upload', methods=['POST'])
 def upload():
     try:
@@ -71,6 +91,8 @@ def get_access_token():
 
     response = requests.post(token_url, headers=headers, data=data)
     
+    print('Token Response:', response.json())  # Log the full response for debugging
+    
     if response.status_code == 200:
         access_token = response.json().get('access_token')
         print('Access Token:', access_token)
@@ -89,6 +111,8 @@ def trigger_refresh_dataset(access_token, dataset_id):
 
     response = requests.post(url, headers=headers)
 
+    print('Refresh Response:', response.json())  # Log the full response for debugging
+
     if response.status_code == 202:
         print('Dataset refresh triggered successfully!: ', response)
     else:
@@ -99,7 +123,7 @@ def refresh_dataset_route():
     access_token = get_access_token()
 
     if access_token:
-        dataset_id = 'bf9eeb6d-6767-4e00-865a-f3bf45fc9e7e'  # Replace with your actual dataset ID
+        dataset_id = 'bbf9eeb6d-6767-4e00-865a-f3bf45fc9e7e'  # Replace with your actual dataset ID
         trigger_refresh_dataset(access_token, dataset_id)
         return jsonify({"success": "true", "message": "Dataset refresh triggered successfully!"}), 200
     else:

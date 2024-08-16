@@ -24,7 +24,13 @@ function Upload() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const isLoggedIn = JSON.parse(localStorage.getItem('IsLoggedIn')) || false;
+
   const handleDataFileChange = (file) => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     if (file.type !== 'text/csv') {
       toast.error('Please upload a CSV file for the dataset.');
     } else {
@@ -33,6 +39,10 @@ function Upload() {
   };
 
   const handleConfigFileChange = (file) => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     if (file.type !== 'application/json') {
       toast.error('Please upload a JSON file for the configuration.');
     } else {
@@ -41,6 +51,10 @@ function Upload() {
   };
 
   const handleFileUpload = async () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     if (!dataFile || !configFile) {
       toast.error('Both files must be uploaded.');
       return;
@@ -71,6 +85,10 @@ function Upload() {
   };
 
   const fetchForecastbasicAnalysis = async () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     try {
       const response = await axios.post('http://localhost:5000/forecast-analysis', {
         unique_col: uniqueCol,
@@ -85,6 +103,10 @@ function Upload() {
   };
 
   const handleFormSubmit = async () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     if (!uniqueCol || !forecastCol) {
       toast.error('Please choose both the columns to proceed.');
       return;
@@ -92,7 +114,9 @@ function Upload() {
     if (error) {
       setModalIsOpen(true);
     } else {
+      setLoading(true);
       const data = await fetchForecastbasicAnalysis();
+      setLoading(false);
       navigate('/basicAnalysis', { state: { results: data.data } });
     }
   };
@@ -106,6 +130,10 @@ function Upload() {
   };
 
   const handleProceedWithErrors = async () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     setModalIsOpen(false);
     setLoading(true);
     const data = await fetchForecastbasicAnalysis();
@@ -122,7 +150,7 @@ function Upload() {
         <>
           {!showDropdowns ? (
             <>
-              <h1 className="header">File Upload and Validation</h1>
+              <h1 >File Upload and Validation</h1>
               <div className="upload-section">
                 <FileUploadForm
                   title="Upload Dataset (CSV)"
@@ -143,7 +171,7 @@ function Upload() {
             </>
           ) : (
             <>
-              <h1 className="header">Choose Unique and Forecast Columns</h1>
+              <h1 >Choose Unique and Forecast Columns</h1>
               <div className="dropdown-section">
                 <select value={uniqueCol} required onChange={(e) => setUniqueCol(e.target.value)}>
                   <option value="">Select Unique Column</option>
