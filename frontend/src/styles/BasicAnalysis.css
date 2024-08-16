@@ -1,0 +1,55 @@
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .plot-image {
+    width: 700px;
+    height: 700px;
+    object-fit: contain;
+  }
+  
+  /* Checkbox grid */
+  .checkboxes {
+    color: navy;
+    width: 100%;
+    max-width: 1200px; /* Optional: Limit the width of the checkbox container */
+  }
+  
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 10px;
+  }
+  
+  .checkbox-item {
+    color: navy;
+    display: flex;
+    align-items: center;
+  }
+  
+  .generate-report {
+    background-color: navy;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

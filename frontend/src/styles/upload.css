@@ -1,160 +1,169 @@
-/* Dialog overlay */
-.dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Dialog content */
-  .dialog-content {
-    background: #FFFFFF; /* White background for dialog */
-    color: #1E1E2F; /* Dark text color for contrast */
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
-    text-align: center; /* Center align content */
-  }
-  
-  /* Form elements */
-  .dialog-content form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between form elements */
-  }
-  
-  .dialog-content label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .dialog-content select {
-    margin-top: 5px;
-  }
-  
-  .dialog-content fieldset {
-    border: none;
-    margin: 10px 0;
-  }
-  
-  .dialog-content legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .dialog-content .radio-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Space between buttons */
-  }
-  
-  .dialog-content .radio-buttons button {
-    background-color: #007ACC; /* Cyber blue */
-    color: #EAEAEA; /* Light text color */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .dialog-content .radio-buttons button:hover {
-    background-color: #005A9C; /* Darker cyber blue */
-    transform: scale(1.05);
-  }
-  
-  .dialog-content button {
-    background-color: #007ACC; /* Cyber blue */
-    color: #EAEAEA; /* Light text color */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 10px 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .dialog-content button:hover {
-    background-color: #005A9C; /* Darker cyber blue */
-    transform: scale(1.05);
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 20px;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  /* Select box styling */
-.dialog-content select {
-    background-color: #1E1E2F; /* Match the container background */
-    color: #EAEAEA; /* Light text color */
-    border: 1px solid #007ACC; /* Cyber blue border */
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 4px;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    width: 100%;
-  }
-  
-  .dialog-content select:hover {
-    border-color: #005A9C; /* Darker cyber blue on hover */
-    background-color: #2E2E3F; /* Slightly lighter dark background on hover */
-  }
-  
-  .dialog-content select:focus {
-    outline: none;
-    border-color: #005A9C; /* Keep the border color consistent with the theme */
-  }
-  
-  /* Styling individual options */
-  .dialog-content option {
-    background-color: #1E1E2F; /* Match the dark theme */
-    color: #EAEAEA; /* Light text color */
-  }
-  
-  /* Improve option appearance on hover */
-  .dialog-content option:hover {
-    background-color: #2E2E3F; /* Slightly lighter background on hover */
-  }
-  
-  /* Adjusting the option appearance when selected */
-  .dialog-content select option:checked {
-    background-color: #005A9C; /* Darker cyber blue when selected */
-    color: #FFFFFF; /* White text color */
-  }
-  
-  /* General button styling */
-  .dialog-content button,
-  button {
-    background-color: #007ACC; /* Cyber blue */
-    color: #EAEAEA; /* Light text color */
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .dialog-content button:hover,
-  button:hover {
-    background-color: #005A9C; /* Darker cyber blue on hover */
-    transform: scale(1.05);
-  }
-  
+/* Import Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* General Container Styling */
+.container {
+  font-family: 'Inter', sans-serif; /* Set Inter font */
+  color: #003366; /* Navy Blue text */
+  background-color: #ffffff; /* White background */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Header Styling */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #003366; /* Navy Blue text */
+}
+
+/* Upload Section */
+.upload-section {
+  display: flex;
+  justify-content: space-between; /* Space items horizontally */
+  align-items: center; /* Center items vertically */
+  gap: 20px; /* Gap between items */
+  width: 100%; /* Full width for centering */
+  max-width: 800px; /* Limit width for better appearance */
+  margin-bottom: 20px; /* Space below */
+}
+
+/* Upload Card Styling */
+.upload-card {
+  background: #F5F5F5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%; /* Full width of its container */
+  max-width: 380px; /* Limit width of each card */
+  text-align: center;
+  position: relative;
+}
+
+/* Dropdown Section Styling */
+.dropdown-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px; /* Limit width for better appearance */
+  margin: 0 auto; /* Center horizontally */
+  margin-bottom: 20px; /* Space below */
+}
+
+.dropdown-section select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #003366; /* Navy Blue border */
+  border-radius: 4px;
+  background: #F5F5F5; /* Light background */
+  color: #003366; /* Navy Blue text */
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  background: #003366; /* Navy Blue */
+  color: #FFFFFF; /* White text */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background: #002244; /* Darker Navy Blue */
+}
+
+/* Error Section Styling */
+.error-section {
+  width: 100%;
+  max-width: 800px; /* Limit width for better appearance */
+  margin: 20px auto; /* Center horizontally */
+}
+
+.error-heading {
+  font-size: 20px;
+  color: #003366; /* Navy Blue text */
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.error-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.err-td {
+  padding: 10px;
+  border: 1px solid #003366; /* Navy Blue border */
+  text-align: center;
+  color: red;
+}
+
+.crt-td {
+  padding: 10px;
+  border: 1px solid #003366; /* Navy Blue border */
+  text-align: center;
+  color: green;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal Content */
+.modal {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  color: #003366; /* Navy Blue text */
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-button {
+  background: #003366; /* Navy Blue */
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.modal-button:hover {
+  background: #002244; /* Darker Navy Blue */
+}
+

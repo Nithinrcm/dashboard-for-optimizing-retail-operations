@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Upload from './Pages/Upload';
-import Eda from './Pages/EDA';
-import Forecast from './Pages/Forecast';
+import Dashboard from './Pages/Dashboard';
+import BasicAnalysis from './Pages/BasicAnalysis';
 
 function App() {
   return (
@@ -10,7 +10,8 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Upload />} />
-          <Route path="/eda" element={<Eda />} />
+          <Route path='/basicAnalysis' element={<BasicAnalysis />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
         </Routes>
       </div>
     </Router>
